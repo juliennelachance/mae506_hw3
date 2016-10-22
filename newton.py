@@ -25,7 +25,8 @@ class Newton(object):
             fx = self._f(x)
             if N.linalg.norm(fx) < self._tol:
                 return x
-            x = self.step(x, fx)
+            else:
+                x = self.step(x, fx)
         return x
 
     def step(self, x, fx=None):
@@ -35,4 +36,4 @@ class Newton(object):
             fx = self._f(x)
         Df_x = F.ApproximateJacobian(self._f, x, self._dx)
         h = N.linalg.solve(N.matrix(Df_x), N.matrix(fx))
-        return x + h
+        return x - h
